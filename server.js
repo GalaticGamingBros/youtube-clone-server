@@ -33,11 +33,12 @@ database.once("connected", () => {
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
-app.use(
-  cors({
-    AccessControlAllowOrigin: "*",
-  })
-);
+// cors is confusing \\
+// app.use(
+//   cors({
+//     AccessControlAllowOrigin: "*",
+//   })
+// );
 app.use(logger("dev"));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
