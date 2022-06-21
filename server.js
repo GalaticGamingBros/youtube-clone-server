@@ -8,11 +8,19 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 const routes = require("./routes/routes");
+const db = require("./config/db");
 
 const app = express();
-const mongoString = process.env.DATABASE_URL;
 
-mongoose.connect(mongoString);
+const serverDevPort = 9000;
+const clientDevPort = 3000;
+// const mongoString = process.env.DATABASE_URL;
+
+mongoose.connect(db, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
 const database = mongoose.connection;
 
 database.on("error", (error) => {
@@ -52,8 +60,8 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-app.listen(9000, () => {
-  console.log(`Server Started at ${9000}`);
+app.listen(serverDevPort, () => {
+  console.log(`Server Started at ${serverDevPort}`);
 });
 
 module.exports = app;
