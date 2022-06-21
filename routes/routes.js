@@ -14,6 +14,7 @@ router.post("/signup", async (req, res) => {
 
   try {
     const dataToSave = await data.save();
+    res.header("Access-Control-Allow-Origin", "*");
     res.status(200).json(dataToSave);
   } catch (error) {
     res.status(400).json({ message: error.message });
