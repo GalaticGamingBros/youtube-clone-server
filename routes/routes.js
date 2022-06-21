@@ -10,6 +10,8 @@ router.post("/signup", async (req, res) => {
     password: req.body.password,
     email: req.body.email,
   });
+  console.log(req.body);
+  console.log(req.body.username);
 
   try {
     const dataToSave = await data.save();
