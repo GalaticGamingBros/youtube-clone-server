@@ -11,9 +11,7 @@ const routes = require("./routes/routes");
 const db = require("./config/db");
 
 const app = express();
-
-const serverDevPort = 9000;
-const clientDevPort = 3000;
+const port = process.env.PORT || 9000;
 // const mongoString = process.env.DATABASE_URL;
 
 mongoose.connect(db, {
@@ -35,11 +33,7 @@ database.once("connected", () => {
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
-app.use(
-  cors({
-    origin: process.env.CLIENT_ORIGIN || `http://localhost:${clientDevPort}`,
-  })
-);
+app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -64,8 +58,8 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-app.listen(serverDevPort, () => {
-  console.log(`Server Started at ${serverDevPort}`);
+app.listen(port, () => {
+  console.log(`Server Started at ${port}`);
 });
 
 module.exports = app;
