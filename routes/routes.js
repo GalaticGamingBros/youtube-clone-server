@@ -6,9 +6,9 @@ const router = express.Router();
 // post method
 router.post("/signup", async (req, res) => {
   const data = new Model({
-    name: req.body.name,
-    email: req.body.email,
+    username: req.body.username,
     password: req.body.password,
+    email: req.body.email,
   });
 
   try {
@@ -59,7 +59,7 @@ router.delete("/delete-account/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const data = await Model.findByIdAndDelete(id);
-    res.send(`Document with ${data.name} has been deleted..`);
+    res.send(`Document with ${data.username} has been deleted..`);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
