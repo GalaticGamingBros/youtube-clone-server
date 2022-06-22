@@ -32,7 +32,7 @@ router.get("/get", async (req, res) => {
 });
 
 // get by ID method
-router.get("/get/:id", (req, res) => {
+router.get("/signin/:id", (req, res) => {
   try {
     const data = Model.findById(req.params.id);
     res.json(data);
