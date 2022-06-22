@@ -10,7 +10,7 @@ router.post("/signup", async (req, res) => {
     password: req.body.password,
     email: req.body.email,
   });
-  req.session.loggedin = true;
+  // req.session.loggedin = true;
 
   console.log(data);
 
@@ -33,7 +33,7 @@ router.get("/get", async (req, res) => {
   }
 });
 
-// get the ID method
+// get by ID method
 router.get("/get/:id", (req, res) => {
   try {
     const data = Model.findById(req.params.id);
