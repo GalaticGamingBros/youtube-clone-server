@@ -33,7 +33,7 @@ router.get("/get", async (req, res) => {
   }
 });
 
-// get by ID method
+// get the ID method
 router.get("/get/:id", (req, res) => {
   try {
     const data = Model.findById(req.params.id);
