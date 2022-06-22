@@ -10,6 +10,8 @@ router.post("/signup", async (req, res) => {
     password: req.body.password,
     email: req.body.email,
   });
+  req.session.loggedin = true;
+
   console.log(data);
 
   try {
@@ -19,10 +21,6 @@ router.post("/signup", async (req, res) => {
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
-});
-
-router.post("/login", (req, res) => {
-  req.session.loggedin = true;
 });
 
 // get method
