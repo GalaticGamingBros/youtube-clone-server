@@ -21,6 +21,10 @@ router.post("/signup", async (req, res) => {
   }
 });
 
+router.post("/login", (req, res) => {
+  req.session.loggedin = true;
+});
+
 // get method
 router.get("/get", async (req, res) => {
   try {
@@ -56,14 +60,28 @@ router.patch("/change-password/:id", async (req, res) => {
   }
 });
 
-// delete by ID method
-router.delete("/delete-account/:id", async (req, res) => {
+// delete method
+router.delete("/delete/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const data = await Model.findByIdAndDelete(id);
     res.send(`Document with ${data.username} has been deleted..`);
   } catch (error) {
     res.status(400).json({ message: error.message });
+  }
+});
+
+router.delete("/logout", (req, res) => {
+  if (req.session) {
+    req.session.destroy((err) => {
+      if (err) {
+        res.status(400).send("Unable to log out");
+      } else {
+        res.send("Logout successful");
+      }
+    });
+  } else {
+    res.end();
   }
 });
 
